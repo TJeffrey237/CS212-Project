@@ -5,12 +5,41 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f4f4f4;
+    background-color: #e4e4e4;
+}
+
+#timer {
+    font-family: Cactus Classical Serif;
+    border: 2px solid black ;
+    background-color: #1f5da8;
+    padding: 20px 40px;
+    font-size: 25px;
+}
+
+h1{
+    padding: 20px;
+}
+
+footer{
+    font-family: Cactus Classical Serif;
+    width: 100%;
+    background-color: #174277;
+    color: white;
+    display: flex;
+    align-items: end;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    font-size: medium;
 }
 
 header {
+    font-family: Cactus Classical Serif;
     width: 100%;
-    background-color: #333;
+    background-color: #174277;
     color: white;
     padding: 10px 20px;
     display: flex;
@@ -18,7 +47,7 @@ header {
     align-items: center;
 }
 
-#quiz-container {
+#quiz-container, #score-container {
     margin: 20px;
     padding: 20px;
     background: white;
