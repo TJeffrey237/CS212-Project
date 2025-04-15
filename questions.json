@@ -2,16 +2,49 @@
     {
         "text": "What is the capital of France?",
         "options": ["Paris", "London", "Berlin", "Madrid"],
-        "correctAnswer": "Paris"
+        "correctAnswer": "Paris",
+        "type": "multiple_choice"
     },
     {
         "text": "Which planet is known as the Red Planet?",
         "options": ["Earth", "Mars", "Jupiter", "Venus"],
-        "correctAnswer": "Mars"
+        "correctAnswer": "Mars",
+        "type": "multiple_choice"
     },
     {
         "text": "What is 2 + 2?",
         "options": ["3", "4", "5", "6"],
-        "correctAnswer": "4"
+        "correctAnswer": "4",
+        "type": "multiple_choice"
+    },
+    {
+        "text": "The chemical symbol for Gold is Au.",
+        "options": ["True", "False"],
+        "correctAnswer": "True",
+        "type": "true_false"
+    },
+    {
+        "text": "Which of the following are programming languages? (check all that apply)",
+        "options": ["Python", "HTML", "Java", "Auxarian"],
+        "correctAnswer": ["Python", "HTML", "Java"],
+        "type": "checkbox"
+    },
+    {
+        "text": "What is the capital of Japan?",
+        "options": ["Seoul", "Tokyo", "Bankok", "Beijing"],
+        "correctAnswer": "Tokyo",
+        "type": "multiple_choice"
+    },
+    {
+        "text": "Rectangles are a type of square.",
+        "options": ["True", "False"],
+        "correctAnswer": "True",
+        "type": "true_false"
+    },
+    {
+        "text": "Which of the following animals can fly? (check all that apply)",
+        "options": ["Penguin", "Eagle", "Bat", "Ostrich"],
+        "correctAnswer": ["Eagle", "Bat"],
+        "type": "checkbox"
     }
 ]
