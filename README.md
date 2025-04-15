@@ -1,2 +1,2 @@
 # CS212-Project
-hey!
+This will be a simple quiz application.
