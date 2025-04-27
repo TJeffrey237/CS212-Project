@@ -209,3 +209,8 @@ function getHighestScore(newScore) {
 // Event listeners for buttons
 document.getElementById('next-question').addEventListener('click', handleNextQuestion); // Handle next question
 document.getElementById('restart-quiz').addEventListener('click', () => location.reload()); // Restart the quiz
+
+function toggleDarkMode() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+ }
