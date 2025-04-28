@@ -7,30 +7,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cactus+Classical+Serif&display=swap" rel="stylesheet">
-    
-    
     <title>Quiz App</title>
     <link rel="stylesheet" href="style.css">
+</head>
 <body>
     <header>
         <h1>Quiz App</h1>
-        <div id="timer">Time Left: <span id="time">00:00</span></div>
+        <button onclick="toggleDarkMode()">Dark Mode?</button>
     </header>
     <main>
-        <div id="quiz-container">
-            <div id="question-box">
-                <h2> Question:</h2>
-                <h2 id="question-text">Question will appear here</h2>
-                <form id="options">
-                    <!-- Options will be dynamically inserted here -->
-                </form>
-            </div>
-            <button id="next-question">Next Question</button>
-        </div>
-        <div id="score-container" style="display: none;">
-            <h2>Your Score: <span id="score"></span></h2>
-            <h2>Highest Score: <span id="highest-score"></h2>
-            <button id="restart-quiz">Restart Quiz</button>
+        <div id="welcome-container">
+            <h2>Welcome</h2>
+            <p>This quiz is a potluck of questions, ranging from simple math to nation's capitols. The button below will take you to the quiz. Good Luck!</p>
+            <button><a href="quiz.html">Start</a></button>
         </div>
     </main>
     <script src="script.js"></script>
