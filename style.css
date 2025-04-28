@@ -164,3 +164,8 @@ button:hover {
 #welcome-container {
     text-align: center;
 }
+
+#loading {
+    height: 35px;
+    vertical-align: middle;
+}
