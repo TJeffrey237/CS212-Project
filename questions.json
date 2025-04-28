@@ -12,10 +12,10 @@
         "type": "multiple_choice"
     },
     {
-        "text": "What is 2 + 2?",
-        "options": ["3", "4", "5", "6"],
+        "text": "What is 2 + 2? (Enter a number)",
+        "options": ["N/A"],
         "correctAnswer": "4",
-        "type": "multiple_choice"
+        "type": "number_input"
     },
     {
         "text": "The chemical symbol for Gold is Au.",
@@ -46,5 +46,11 @@
         "options": ["Penguin", "Eagle", "Bat", "Ostrich"],
         "correctAnswer": ["Eagle", "Bat"],
         "type": "checkbox"
+    },
+    {
+        "text": "What is 10 + 90? (Enter a number)",
+        "options": ["N/A"],
+        "correctAnswer": "100",
+        "type": "number_input"
     }
 ]

@@ -42,13 +42,16 @@ function displayQuestion() {
 
     // Get the current question
     const question = questions[currentQuestionIndex];
-    // Update the question text
+
+    // Update the question text and number
     document.getElementById('question-text').textContent = question.text;
+    document.querySelector('#question-box h2').textContent = `Question ${currentQuestionIndex + 1}:` 
 
     // Clear and populate the options
     const optionsContainer = document.getElementById('options');
     optionsContainer.innerHTML = '';
 
+    // populate question based on type
     switch(question.type) {
         case "true_false":
             const trueFalseOptions = document.createElement('div');
@@ -80,8 +83,6 @@ function displayQuestion() {
                 optionsContainer.appendChild(optionElement);
             });
             break;
-        // code below is for a future question type
-        /*
         case "number_input":
             const optionElement = document.createElement('div');
             optionElement.innerHTML = `
@@ -89,7 +90,6 @@ function displayQuestion() {
             `;
             optionsContainer.appendChild(optionElement);
             break;
-        */
         default:
             console.log("Issue: Undefined question type.");
     }
@@ -99,18 +99,47 @@ function displayQuestion() {
  * Handles the user's answer and provides feedback.
  */
 function handleNextQuestion() {
-    // Get the selected option
-    const selectedOption = document.querySelector('input[name="option"]:checked');
-    if (!selectedOption) {
-        alert('Please select an answer!'); // Alert if no option is selected
+    let currentQuestion = questions[currentQuestionIndex]
+
+    // Get selected radio button
+    const selectedRadio = document.querySelector('input[name="option"]:checked');
+    // Get any checked checkbox
+    const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    // Get any non-empty text input
+    const filledTextInput = document.querySelector('input[type="text"]:not([disabled])');
+
+    // Check if text input has value
+    const hasFilledTextInput = filledTextInput && filledTextInput.value.trim() !== '';
+
+    // check if  that all types are empty
+    if (!selectedRadio && checkedCheckboxes.length === 0 && !hasFilledTextInput) {
+        alert('Please answer at least one question!');
         return;
     }
 
-    // Check if the selected answer is correct
-    const answer = selectedOption.value;
+    // get answers based on type
+    let answer;
+    switch(currentQuestion.type) {
+        case "true_false":
+            answer = selectedRadio.value;
+            break;
+        case "multiple_choice":
+            answer = selectedRadio.value;
+            break;
+        case "checkbox":
+            answer = Array.from(checkedCheckboxes).map(checkbox => checkbox.value)
+            console.log(answer)
+            break;
+        case "number_input":
+            answer = filledTextInput.value.trim()
+            break;
+        default:
+            console.log("Error: undefined question type.")
+            break;
+    }
 
-    // check the answers
-    if(checkAnswer(questions[currentQuestionIndex], answer)) {
+    // check the answers & updates score
+    if(checkAnswer(currentQuestion, answer)) {
         score++;
     }
 
@@ -120,16 +149,17 @@ function handleNextQuestion() {
         // feedback.remove();
         currentQuestionIndex++;
         displayQuestion();
-    }, 2000);
+    }, 500);
 }
 
+// checks answers based on type
 function checkAnswer(question, userAnswer) {
     switch(question.type) {
         case "true_false":
             return checkTrueFalse(userAnswer, question.correctAnswer);
         case "multiple_choice":
             return checkMultipleChoice(userAnswer, question.correctAnswer);
-        case "checkboxes":
+        case "checkbox":
             return checkCheckboxes(userAnswer, question.correctAnswer);
         case "number_input":
             return checkNumberInput(userAnswer, question.correctAnswer);
@@ -143,18 +173,7 @@ function checkTrueFalse(userAnswer, correctAnswer) {
 }
 
 function checkMultipleChoice(userAnswer, correctAnswer) {
-    // const feedback = document.createElement('div');
-    // feedback.id = 'feedback';
-
-    if (userAnswer === correctAnswer) {
-        // feedback.textContent = 'Correct!';
-        // feedback.style.color = 'green';
-        return true;
-    } else {
-        // feedback.textContent = `Incorrect! The correct answer is: ${questions[currentQuestionIndex].correctAnswer}`;
-        // feedback.style.color = 'red';
-        return false;
-    }
+    return userAnswer === correctAnswer;
 }
 
 function checkCheckboxes(userAnswers, correctAnswers) {

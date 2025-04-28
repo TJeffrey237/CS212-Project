@@ -58,8 +58,9 @@ body {
     font-size: 25px;
 }
 
-h1{
+h1 {
     padding: 20px;
+    text-align: center;
 }
 
 footer{
@@ -67,6 +68,7 @@ footer{
     background-color: #174277;
     color: white;
     position: fixed;
+    text-align: center;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -127,7 +129,7 @@ button:hover {
     display: flex;
     flex-wrap: wrap;
     background-color: #e4e4e4;
-    ;
+    justify-content: center;
 }
 
 .flex-container > div {
@@ -147,4 +149,12 @@ button:hover {
 
 .dark-mode .flex-container{
     background-color: #605656;
+}
+
+#dark-mode-btn {
+    margin-right: 50px;
+}
+
+#welcome-container {
+    text-align: center;
 }
