@@ -70,6 +70,7 @@ function displayQuestion() {
                     <input type="radio" name="option" id="option${index}" value="${option}">
                     <label for="option${index}">${option}</label>
                 `;
+                console.log(index);
                 optionsContainer.appendChild(optionElement);
             });
             break;
