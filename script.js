@@ -34,6 +34,9 @@ function shuffleQuestions(questions) {
  * Displays the current question and its options.
  */
 function displayQuestion() {
+    // enabling button and hiding loading
+    document.getElementById('next-question').disabled = false;
+    document.getElementById('loading').style.display = 'none';
     // Check if all questions have been answered
     if (currentQuestionIndex >= questions.length) {
         endQuiz(); // End the quiz if no more questions
@@ -114,6 +117,7 @@ function handleNextQuestion() {
 
     // check if  that all types are empty
     if (!selectedRadio && checkedCheckboxes.length === 0 && !hasFilledTextInput) {
+        document.getElementById('loading').style.display = 'none';
         alert('Please answer at least one question!');
         return;
     }
@@ -187,6 +191,10 @@ function checkNumberInput(userAnswer, correctAnswer) {
     return Number(userAnswer) === Number(correctAnswer);
 }
 
+
+function checkNotEmpty() {
+
+}
 /**
  * Starts the quiz timer and updates the timer display.
  */
@@ -227,8 +235,13 @@ function getHighestScore(newScore) {
 }
 
 // Event listeners for buttons
-document.getElementById('next-question').addEventListener('click', handleNextQuestion); // Handle next question
-document.getElementById('restart-quiz').addEventListener('click', () => location.reload()); // Restart the quiz
+document.getElementById('next-question').addEventListener('click', function() {
+    const button = this;
+    button.disabled = true;
+    document.getElementById('loading').style.display = 'inline';
+    handleNextQuestion();
+});
+document.getElementById('restart-quiz').addEventListener('click', () => location.reload());
 
 function toggleDarkMode() {
     var element = document.body;
