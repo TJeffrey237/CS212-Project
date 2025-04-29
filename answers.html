@@ -17,64 +17,29 @@
         <button id="dark-mode-btn" onclick="toggleDarkMode()">Dark Mode?</button>
     </header>
     <main>
-        <div class="flex-container">
-            <div>
-                <h3>Question:</h3>
-                <p>What is the capital of France?</p>
-                <h3>Answer:</h3>
-                <p>Paris</p>
-            </div>
-            <div>
-                <h3>Question:</h3>
-                <p>Which planet is known as the Red Planet?</p>
-                <h3>Answer:</h3>
-                <p>Mars</p>
-            </div>
-            <div>
-                <h3>Question:</h3>
-                <p>What is 2 + 2?</p>
-                <h3>Answer:</h3>
-                <p>4</p>
-            </div>  
-            <div>
-                <h3>Question:</h3>
-                <p>The chemical symbol for Gold is Au.</p>
-                <h3>Answer:</h3>
-                <p>True</p>
-            </div>
-            <div>
-                <h3>Question:</h3>
-                <p>Which of the following are programming languages?</p>
-                <h3>Answer:</h3>
-                <p>Python, HTML, Java</p>
-            </div>
-            <div>
-                <h3>Question:</h3>
-                <p>What is the capital of Japan?</p>
-                <h3>Answer:</h3>
-                <p>Tokyo</p>
-            </div>  
-            <div>
-                <h3>Question:</h3>
-                <p>Rectangles are a type of square.</p>
-                <h3>Answer:</h3>
-                <p>True</p>
-            </div>
-            <div>
-                <h3>Question:</h3>
-                <p>Which of the following animals can fly?</p>
-                <h3>Answer:</h3>
-                <p>Eagle, Bat</p>
-            </div>
-            <div>
-                <h3>Question:</h3>
-                <p>What is 10 + 90?</p>
-                <h3>Answer:</h3>
-                <p>100</p>
-            </div>
-          </div>
+        <div class="flex-container" id="answers-container">
+            <!-- Answers will be dynamically inserted here -->
+        </div>
     </main>
-    <script src="script.js"></script>
+    <script>
+        // Retrieve user answers from localStorage
+        const userAnswers = JSON.parse(localStorage.getItem('userAnswers')) || [];
+        const answersContainer = document.getElementById('answers-container');
+
+        // Populate the answers container
+        userAnswers.forEach(answer => {
+            const answerDiv = document.createElement('div');
+            answerDiv.innerHTML = `
+                <h3>Question:</h3>
+                <p>${answer.question}</p>
+                <h3>Your Answer:</h3>
+                <p>${Array.isArray(answer.userAnswer) ? answer.userAnswer.join(', ') : answer.userAnswer}</p>
+                <h3>Correct Answer:</h3>
+                <p>${Array.isArray(answer.correctAnswer) ? answer.correctAnswer.join(', ') : answer.correctAnswer}</p>
+            `;
+            answersContainer.appendChild(answerDiv);
+        });
+    </script>
 </body>
 <footer>
     <p>This quiz was made by: Tyler Jeffrey, Joseph Schweiger, and Hannah Sproul</p>

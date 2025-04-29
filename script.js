@@ -5,6 +5,9 @@ let score = 0; // User's score
 let timer; // Timer interval reference
 let timeLeft = 60; // Total time for the quiz in seconds
 
+// Initialize an array to store user answers
+let userAnswers = [];
+
 // Load questions from the JSON file
 fetch('questions.json')
 .then(response => response.json())
@@ -103,7 +106,7 @@ function displayQuestion() {
  * Handles the user's answer and provides feedback.
  */
 function handleNextQuestion() {
-    let currentQuestion = questions[currentQuestionIndex]
+    let currentQuestion = questions[currentQuestionIndex];
 
     // Get selected radio button
     const selectedRadio = document.querySelector('input[name="option"]:checked');
@@ -115,16 +118,16 @@ function handleNextQuestion() {
     // Check if text input has value
     const hasFilledTextInput = filledTextInput && filledTextInput.value.trim() !== '';
 
-    // check if  that all types are empty
+    // Check if all types are empty
     if (!selectedRadio && checkedCheckboxes.length === 0 && !hasFilledTextInput) {
         document.getElementById('loading').style.display = 'none';
         alert('Please answer at least one question!');
         return;
     }
 
-    // get answers based on type
+    // Get answers based on type
     let answer;
-    switch(currentQuestion.type) {
+    switch (currentQuestion.type) {
         case "true_false":
             answer = selectedRadio.value;
             break;
@@ -132,26 +135,32 @@ function handleNextQuestion() {
             answer = selectedRadio.value;
             break;
         case "checkbox":
-            answer = Array.from(checkedCheckboxes).map(checkbox => checkbox.value)
-            console.log(answer)
+            answer = Array.from(checkedCheckboxes).map(checkbox => checkbox.value);
             break;
         case "number_input":
-            answer = filledTextInput.value.trim()
+            answer = filledTextInput.value.trim();
             break;
         default:
-            console.log("Error: undefined question type.")
+            console.log("Error: undefined question type.");
             break;
     }
 
-    // check the answers & updates score
-    if(checkAnswer(currentQuestion, answer)) {
+    // Store the user's answer
+    userAnswers.push({ question: currentQuestion.text, userAnswer: answer, correctAnswer: currentQuestion.correctAnswer });
+
+    // Check the answers & update score
+    const isCorrect = checkAnswer(currentQuestion, answer);
+    if (isCorrect) {
         score++;
     }
 
+    // Change quiz box color based on correctness
+    const quizContainer = document.getElementById('quiz-container');
+    quizContainer.style.backgroundColor = isCorrect ? 'green' : 'red';
+
     // Display feedback and move to the next question after 2 seconds
-    // document.getElementById('quiz-container').appendChild(feedback);
     setTimeout(() => {
-        // feedback.remove();
+        quizContainer.style.backgroundColor = ''; // Reset to default color
         currentQuestionIndex++;
         displayQuestion();
     }, 500);
@@ -220,6 +229,9 @@ function endQuiz() {
 
     highScore = getHighestScore(score);
     document.getElementById('highest-score').textContent = `${highScore} / ${questions.length}`;
+
+    // Store user answers in localStorage for the answers page
+    localStorage.setItem('userAnswers', JSON.stringify(userAnswers));
 }
 
 // function to update the high score
