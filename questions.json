@@ -38,7 +38,7 @@
     {
         "text": "Rectangles are a type of square.",
         "options": ["True", "False"],
-        "correctAnswer": "True",
+        "correctAnswer": "False",
         "type": "true_false"
     },
     {
