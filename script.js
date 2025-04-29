@@ -81,7 +81,7 @@ function displayQuestion() {
             question.options.forEach((option, index) => {
                 const optionElement = document.createElement('div');
                 optionElement.innerHTML = `
-                    <input type="checkbox" name="option" id="option${index}" value="${option}">
+                    <input id="text-input-box" type="checkbox" name="option" id="option${index}" value="${option}">
                     <label for="option${index}">${option}</label>
                 `;
                 optionsContainer.appendChild(optionElement);
@@ -242,6 +242,11 @@ document.getElementById('next-question').addEventListener('click', function() {
     handleNextQuestion();
 });
 document.getElementById('restart-quiz').addEventListener('click', () => location.reload());
+document.body.addEventListener("keydown", function(event) {
+    if (event.target.matches('input[name="option"]') && event.key === "Enter") {
+      event.preventDefault();
+    }
+  });
 
 function toggleDarkMode() {
     var element = document.body;
