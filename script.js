@@ -258,9 +258,22 @@ document.body.addEventListener("keydown", function(event) {
     if (event.target.matches('input[name="option"]') && event.key === "Enter") {
       event.preventDefault();
     }
-  });
+});
 
+//Toggle Dark mode and save using Local Storage
 function toggleDarkMode() {
     var element = document.body;
     element.classList.toggle("dark-mode");
- }
+
+    if (element.classList.contains("dark-mode")) {
+        localStorage.setItem("darkMode", "enabled");
+    } else {
+        localStorage.setItem("darkMode", "disabled");
+    }
+}
+
+window.onload = function() {
+    if (localStorage.getItem("darkMode") === "enabled") {
+        document.body.classList.add("dark-mode");
+    }
+}
