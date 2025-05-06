@@ -8,6 +8,19 @@ let timeLeft = 60; // Total time for the quiz in seconds
 // Initialize an array to store user answers
 let userAnswers = [];
 
+// perform any on load processes
+window.onload = function() {
+    console.log("BOO")
+    toggleDark = localStorage.getItem("darkMode")
+    console.log(toggleDark)
+    if (localStorage.getItem("darkMode") === "enabled") {
+        document.body.classList.add("dark-mode");
+    }
+    else if (localStorage.getItem("darkMode") === "disabled") {
+        document.body.classList.remove("dark-mode");
+    }
+}
+
 // Load questions from the JSON file
 fetch('questions.json')
 .then(response => response.json())
@@ -200,10 +213,6 @@ function checkNumberInput(userAnswer, correctAnswer) {
     return Number(userAnswer) === Number(correctAnswer);
 }
 
-
-function checkNotEmpty() {
-
-}
 /**
  * Starts the quiz timer and updates the timer display.
  */
@@ -260,20 +269,14 @@ document.body.addEventListener("keydown", function(event) {
     }
 });
 
-//Toggle Dark mode and save using Local Storage
+// Toggle Dark mode and save using Local Storage
 function toggleDarkMode() {
-    var element = document.body;
+    const element = document.body;
     element.classList.toggle("dark-mode");
 
     if (element.classList.contains("dark-mode")) {
         localStorage.setItem("darkMode", "enabled");
     } else {
         localStorage.setItem("darkMode", "disabled");
-    }
-}
-
-window.onload = function() {
-    if (localStorage.getItem("darkMode") === "enabled") {
-        document.body.classList.add("dark-mode");
     }
 }
